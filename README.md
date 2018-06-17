@@ -1,0 +1,2 @@
+# nginx
+Nginx server component
