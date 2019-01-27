@@ -1,13 +1,11 @@
 #!/bin/bash
 
-if [[ $LOCALPORT == 3000 ]]
+if [[ $LOCALPORT == $PORT ]]
 then
-  echo "Meteor instance connected @ $LOCALHOST:$LOCALPORT"
-  echo "server $LOCALHOST:$LOCALPORT;" >> /instances
+  echo "instance connected @ $LOCALHOST:$LOCALPORT"
+  echo "server $LOCALHOST:$LOCALPORT;" >> /.stack/app/servers
   echo "Adding instance to Nginx config"
-  INSTANCES="$(cat /instances)"
-  TEMPLATE="$(cat /template)"
-  CONFIG=$(eval "$TEMPLATE")
-  echo "$CONFIG" > /etc/nginx/conf.d/default.conf
   nginx -s reload
+  touch /.stack/app/servers.html
 fi
+
